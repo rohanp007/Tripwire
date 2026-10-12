@@ -1,0 +1,25 @@
+server:
+    port: 8081
+spring:
+    application:
+        name: ingest-service
+    datasource:
+        url: jdbc:postgresql://localhost:5433/${INGEST_POSTGRES_DB}
+        username: ${INGEST_POSTGRES_USER}
+        password: ${INGEST_POSTGRES_PASS}
+    jpa:
+        hibernate:
+            ddl-auto: validate
+        open-in-view: false
+    flyway:
+        enabled: true
+    config:
+        import: optional:file:../.env[.properties]
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health
+    endpoint:
+        health:
+            show-details: never
